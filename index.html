@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noreen Naaz Medicare | Zubi IP Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: radial-gradient(circle, rgba(70, 236, 252, 1) 3%, rgba(74, 84, 153, 1) 99%);
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .card h2 {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-container {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 7px;
+            color: #333;
+        }
+
+        .insert-button {
+            position: relative;
+            display: flex;
+        }
+
+        .insert-button input {
+            flex: 1;
+            height: 45px;
+            padding: 10px 40px 10px 15px;
+            font-size: 15px;
+            outline: none;
+            background: #fff;
+            border-radius: 3px;
+            border: 1px solid #bfbfbf;
+            transition: all 0.3s ease;
+        }
+
+        .insert-button input:focus {
+            border-color: #4a5499;
+            box-shadow: 0 0 0 2px rgba(74, 84, 153, 0.2);
+        }
+
+        .insert-button i {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4a5499;
+            cursor: pointer;
+            background: white;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .insert-button i:hover {
+            color: #3a4479;
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .submit-btn {
+            margin-top: 20px;
+        }
+
+        .submit-btn input {
+            color: white;
+            border: none;
+            height: 50px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #4a5499;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn input:hover {
+            background: #3a4479;
+        }
+
+        .submit-btn input:active {
+            transform: scale(0.98);
+        }
+
+        .info-container {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid #eaeaea;
+            display: none;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #4a5499;
+        }
+
+        .info-value {
+            font-weight: normal;
+            text-align: right;
+        }
+
+        .error-text {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .success-text {
+            color: #2ecc71;
+            font-size: 14px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .warning-text {
+            color: #f39c12;
+            font-size: 14px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .error {
+            border-color: #e74c3c !important;
+            background: #fceae9 !important;
+        }
+
+        .success {
+            border-color: #2ecc71 !important;
+            background: #eafaf1 !important;
+        }
+
+        .warning {
+            border-color: #f39c12 !important;
+            background: #fef5e7 !important;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .footer i {
+            color: #e74c3c;
+        }
+
+        .duplicate-alert {
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .duplicate-alert i {
+            color: #f39c12;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .card h2 {
+                font-size: 1.3rem;
+            }
+            
+            .insert-button {
+                flex-direction: column;
+            }
+            
+            .insert-button i {
+                position: relative;
+                margin-top: 10px;
+                padding: 10px;
+                text-align: center;
+                transform: none;
+                top: 0;
+                background: #f0f0f0;
+            }
+            
+            .info-row {
+                flex-direction: column;
+            }
+            
+            .info-label {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-globe-americas"></i>
+                <h1>Noreen Naaz Medicare IP Trackerr</h1>
+            </div>
+            <p>Track any IP Address And Prevent Duplicate Fraud ip</p>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-search-location"></i> IP Information Tracker</h2>
+            
+            <div class="form-container">
+                <form id="ipForm" method="POST">
+                    <div class="form-group">
+                        <label for="ip"><i class="fas fa-network-wired"></i> Enter IP Address</label>
+                        <div class="insert-button">
+                            <input type="text" id="ip" name="ip" placeholder="e.g., 192.168.1.1" maxlength="40">
+                            <i class="fa-solid fa-rotate" id="refreshButton" title="Get My IP"></i>
+                        </div>
+                        <small class="error-text"></small>
+                        <small class="success-text"></small>
+                        <small class="warning-text"></small>
+                    </div>
+
+                    <div id="duplicateAlert" class="duplicate-alert" style="display: none;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Duplicate IP Address Detected!</strong>
+                            <p>This IP address already exists in our records and will not be saved again.</p>
+                        </div>
+                    </div>
+
+                    <div id="ipInfo" class="info-container">
+                        <div class="info-row">
+                            <span class="info-label">IP Address:</span>
+                            <span id="ipAddress" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Country:</span>
+                            <span id="country" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Region:</span>
+                            <span id="region" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">City:</span>
+                            <span id="city" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">ISP:</span>
+                            <span id="isp" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Organization:</span>
+                            <span id="org" class="info-value">-</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group submit-btn">
+                        <input type="submit" value="Track & Save IP Information">
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Created with <i class="fas fa-heart"></i> for Noreen Naaz Medicare | Hosted By M.Zubair.M</p>
+        </div>
+    </div>
+
+    <script>
+        // Function to display error messages
+        const showError = (field, errorText) => {
+            if (!field) {
+                console.error("Error field is null:", errorText);
+                return;
+            }
+            
+            field.classList.add("error");
+            const errorElement = document.createElement("small");
+            errorElement.classList.add("error-text");
+            errorElement.innerText = errorText;
+            
+            const parent = field.closest(".form-group");
+            if (parent) {
+                parent.appendChild(errorElement);
+            } else {
+                console.error("Parent container not found for field:", field);
+                document.body.prepend(errorElement);
+            }
+        };
+
+        // Function to display warning messages
+        const showWarning = (field, warningText) => {
+            if (!field) {
+                console.log("Warning:", warningText);
+                return;
+            }
+            
+            field.classList.add("warning");
+            const warningElement = document.createElement("small");
+            warningElement.classList.add("warning-text");
+            warningElement.innerText = warningText;
+            
+            const parent = field.closest(".form-group");
+            if (parent) {
+                parent.appendChild(warningElement);
+            } else {
+                document.body.prepend(warningElement);
+            }
+        };
+
+        // Function to display success messages
+        const showSuccess = (field, successText) => {
+            if (!field) {
+                console.log("Success:", successText);
+                return;
+            }
+            
+            field.classList.add("success");
+            const successElement = document.createElement("small");
+            successElement.classList.add("success-text");
+            successElement.innerText = successText;
+            
+            const parent = field.closest(".form-group");
+            if (parent) {
+                parent.appendChild(successElement);
+            } else {
+                document.body.prepend(successElement);
+            }
+        };
+
+        // Function to clear messages
+        const clearMessages = () => {
+            document.querySelectorAll(".error-text, .success-text, .warning-text").forEach(element => {
+                element.remove();
+            });
+            document.querySelectorAll(".form-group .error, .form-group .success, .form-group .warning").forEach(field => {
+                field.classList.remove("error", "success", "warning");
+            });
+        };
+
+        // Function to save IP to server
+        async function saveIP(ip) {
+            try {
+                const formData = new FormData();
+                formData.append('ip', ip);
+                
+                console.log("Saving IP:", ip);
+                const response = await fetch('get_ip.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.text();
+                console.log("Save result:", result);
+                
+                if (result.includes("DUPLICATE")) {
+                    return { status: "duplicate", message: result };
+                }
+                
+                return { status: "success", message: result };
+            } catch (error) {
+                console.error("Error saving IP:", error);
+                return { status: "error", message: "Network error: " + error.message };
+            }
+        }
+
+        // Function to get IP information
+        async function getIPInfo(ip) {
+            try {
+                // Using ipinfo.io with your token
+                const response = await fetch(`https://ipinfo.io/${ip}/json?token=649892daca220d`);
+                
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                return {
+                    success: true,
+                    data: {
+                        ip: data.ip || 'N/A',
+                        country: data.country || 'N/A',
+                        region: data.region || 'N/A',
+                        city: data.city || 'N/A',
+                        isp: data.org || 'N/A',
+                        org: data.org || 'N/A',
+                        location: data.loc || 'N/A'
+                    }
+                };
+            } catch (error) {
+                console.error('Error fetching IP info:', error);
+                return {
+                    success: false,
+                    message: error.message || 'Failed to get IP information'
+                };
+            }
+        }
+
+        // Function to display IP info
+        function displayIPInfo(data) {
+            const displayIfExists = (id, value) => {
+                const element = document.getElementById(id);
+                if (element) element.textContent = value;
+            };
+            
+            displayIfExists("ipAddress", data.ip);
+            displayIfExists("country", data.country);
+            displayIfExists("region", data.region);
+            displayIfExists("city", data.city);
+            displayIfExists("isp", data.isp);
+            displayIfExists("org", data.org);
+            
+            // Show the info container if it exists
+            const infoContainer = document.getElementById("ipInfo");
+            if (infoContainer) infoContainer.style.display = "block";
+        }
+
+        // Function to get user's current IP
+        async function getCurrentIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                const ipInput = document.getElementById("ip");
+                if (ipInput) ipInput.value = data.ip;
+                return data.ip;
+            } catch (error) {
+                console.error('Error fetching current IP:', error);
+                showError(document.getElementById("ip"), 'Failed to get your IP address');
+                return null;
+            }
+        }
+
+        // Function to handle form submission
+        const handleFormData = async (e) => {
+            e.preventDefault();
+            clearMessages();
+            
+            // Hide duplicate alert
+            document.getElementById("duplicateAlert").style.display = "none";
+
+            // Retrieving input elements
+            const ipInput = document.getElementById("ip");
+            const ip = ipInput ? ipInput.value.trim() : '';
+
+            // Regular expression pattern for IP address validation
+            const ipv4Pattern = /^(\d{1,3}\.){3}\d{1,3}$/;
+            const ipv6Pattern = /^([\da-f]{1,4}:){7}[\da-f]{1,4}$/i;
+
+            // Performing validation checks
+            if (!ip) {
+                if (ipInput) showError(ipInput, "Please enter an IP address");
+                return;
+            }
+            
+            if (!ipv4Pattern.test(ip) && !ipv6Pattern.test(ip)) {
+                if (ipInput) showError(ipInput, "Please enter a valid IP address (IPv4 or IPv6)");
+                return;
+            }
+
+            try {
+                // Get IP information first
+                const ipInfo = await getIPInfo(ip);
+                
+                if (!ipInfo.success) {
+                    if (ipInput) showError(ipInput, ipInfo.message);
+                    return;
+                }
+                
+                // Display IP information
+                displayIPInfo(ipInfo.data);
+                
+                // Save IP to server
+                const saveResult = await saveIP(ip);
+                
+                if (saveResult.status === "success") {
+                    if (ipInput) showSuccess(ipInput, "IP information tracked and saved successfully!");
+                } 
+                else if (saveResult.status === "duplicate") {
+                    // Show duplicate warning
+                    if (ipInput) showWarning(ipInput, "This IP already exists in our system");
+                    
+                    // Show the duplicate alert
+                    document.getElementById("duplicateAlert").style.display = "flex";
+                }
+                else {
+                    if (ipInput) showError(ipInput, "IP tracking succeeded but saving failed. Information not saved.");
+                }
+                
+            } catch (error) {
+                if (ipInput) showError(ipInput, "An error occurred while processing your request. Please try again.");
+                console.error('Error:', error);
+            }
+        };
+
+        // Handling form submission event
+        const ipForm = document.getElementById("ipForm");
+        if (ipForm) {
+            ipForm.addEventListener("submit", handleFormData);
+        }
+
+        // Event listener for IP input changes
+        const ipField = document.getElementById("ip");
+        if (ipField) {
+            ipField.addEventListener("input", function() {
+                const ip = this.value.trim();
+                clearMessages();
+                document.getElementById("duplicateAlert").style.display = "none";
+                
+                // Validate IP as user types
+                const ipv4Pattern = /^(\d{1,3}\.){3}\d{1,3}$/;
+                const ipv6Pattern = /^([\da-f]{1,4}:){7}[\da-f]{1,4}$/i;
+                
+                if (ip && !ipv4Pattern.test(ip) && !ipv6Pattern.test(ip)) {
+                    showError(this, "Please enter a valid IP address");
+                }
+            });
+        }
+
+        // Setup refresh button
+        const refreshButton = document.getElementById("refreshButton");
+        if (refreshButton) {
+            refreshButton.addEventListener("click", async () => {
+                const ip = await getCurrentIP();
+                if (ip) {
+                    // Create and dispatch submit event
+                    const event = new Event('submit', { bubbles: true, cancelable: true });
+                    if (ipForm) ipForm.dispatchEvent(event);
+                }
+            });
+        }
+
+        // Initialize - get user's IP on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            getCurrentIP();
+        });
+    </script>
+</body>
+</html>
